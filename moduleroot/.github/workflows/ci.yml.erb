@@ -30,7 +30,9 @@ jobs:
 <% end -%>
   unit:
     runs-on: ubuntu-latest
+<% if File.exist?(File.join(@metadata[:workdir], ".rubocop.yml")) -%>
     needs: rubocop
+<% end -%>
     strategy:
       matrix:
         ruby:
