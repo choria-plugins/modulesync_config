@@ -22,6 +22,7 @@ group :release do
   gem 'faraday-retry', '~> 2.1', require: false
 end
 
+gem 'rake'
 gem 'puppet_forge', '>= 2.2.9'
 gem 'metadata_json_deps', '>= 0.2.0', '< 2'
 gem 'modulesync', '>= 2.6.0'
