@@ -1,0 +1,14 @@
+#!/bin/sh
+
+set -e
+
+for module in modules/voxpupuli/* ; do
+  (cd "$module"
+  git status
+  git reset --hard
+  git clean -dfx
+  git checkout "$(basename "$(git symbolic-ref refs/remotes/origin/HEAD)")"
+  git pull --prune --quiet
+  git branch -D modulesync || true
+  )
+done

@@ -1,0 +1,7 @@
+---
+git_base: 'git@github.com:'
+namespace: choria-plugins
+branch: modulesync
+message: "Update from choria-plugins modulesync_config"
+...
+# vim: syntax=yaml

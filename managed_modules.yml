@@ -1,0 +1,12 @@
+---
+- filemgr-agent
+- iptables-agent
+- nettest-agent
+- nrpe-agent
+- package-agent
+- process-agent
+- puppet-agent
+- puppetca-agent
+- service-agent
+- shell-agent
+#- tasks-agent
