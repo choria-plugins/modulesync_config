@@ -1,0 +1,41 @@
+# Managed by modulesync - DO NOT EDIT
+# https://voxpupuli.org/docs/updating-files-managed-with-modulesync/
+
+source "https://rubygems.org"
+
+<% groups = {} -%>
+<% (@configs['required'].keys + ((@configs['optional'] || {}).keys)).uniq.each do |key| -%>
+<%   groups[key] = (@configs['required'][key] || []) + ((@configs['optional'] || {})[key] || []) -%>
+<% end -%>
+<% -%>
+<% groups.each do |group, gems| -%>
+group <%= group %> do
+<% maxlen = gems.map! do |gem| -%>
+<%            gem['platforms'].map!{|a| a.to_sym} unless gem['platforms'].nil? -%>
+<%            { -%>
+<%              'gem'           => gem['gem'], -%>
+<%              'version'       => gem['version'], -%>
+<%              'platforms'     => gem['platforms'], -%>
+<%              'require'       => gem['require'], -%>
+<%              'git'           => gem['git'], -%>
+<%              'branch'        => gem['branch'], -%>
+<%              'ruby-version'  => gem['ruby-version'], -%>
+<%              'ruby-operator' => gem['ruby-operator'], -%>
+<%              'length'        => gem['gem'].length + (("', '".length if gem['version']) || 0) + gem['version'].to_s.length -%>
+<%            } -%>
+<%          end.map do |gem| -%>
+<%            gem['length'] -%>
+<%          end.max -%>
+<% gems.each do |gem| -%>
+  gem "<%= gem['gem'] %>"<%= ", \"#{gem['version']}\"" if gem['version'] %>, <%= ' ' * (maxlen - gem['length']) %>:require => false<%= ", :git => \"#{gem['git']}\"" if gem['git'] %><%= ", :branch => \"#{gem['branch']}\"" if gem['branch'] %><%= ", :platforms => #{gem['platforms']}" if gem['platforms'] %><%= " if RUBY_VERSION #{gem['ruby-operator']} \"#{gem['ruby-version']}\"" if (gem['ruby-operator'] && gem['ruby-version']) %>
+<% end -%>
+end
+
+<% end -%>
+mcollective_version = ENV["MCOLLECTIVE_GEM_VERSION"]
+
+if mcollective_version
+  gem "mcollective-client", mcollective_version, :require => false
+else
+  gem "mcollective-client", :require => false
+end
