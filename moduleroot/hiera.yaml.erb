@@ -6,9 +6,15 @@ defaults:
   data_hash: yaml_data
 
 hierarchy:
+<% if File.directory?(File.join(@metadata[:workdir], "data", "os")) -%>
+  - name: "Distribution Name"
+    path: "os/%{facts.os.family}.yaml"
+<% end -%>
+<% if File.directory?(File.join(@metadata[:workdir], "data", "puppet_aio")) -%>
+  - name: "AIO version specific common"
+    path: "puppet_aio/%{facts.mcollective.aio_major_version}.yaml"
+<% end -%>
   - name: "plugin"
     path: "plugin.yaml"
-  - name: "os-specific"
-    path: "os/%{facts.os.family}.yaml"
   - name: "defaults"
     path: "defaults.yaml"
