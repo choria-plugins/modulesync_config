@@ -2,6 +2,7 @@
 - action-policy
 - filemgr-agent
 - iptables-agent
+- mcollective_choria
 - nettest-agent
 - nrpe-agent
 - package-agent

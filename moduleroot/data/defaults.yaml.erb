@@ -1,8 +1,10 @@
 <%
     module_name = case @metadata[:module_name]
-                  when 'action-policy'
+                  when "action-policy"
                     "mcollective_util_actionpolicy"
-                  when 'tasks-agent'
+                  when "mcollective_choria"
+                    "mcollective_choria"
+                  when "tasks-agent"
                     "mcollective_agent_bolt_tasks"
                   when /-agent$/
                     "mcollective_agent_#{@metadata[:module_name].sub(/-agent$/, '')}"
