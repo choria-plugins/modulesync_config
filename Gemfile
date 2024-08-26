@@ -26,5 +26,5 @@ gem 'rake'
 gem 'puppet_forge', '>= 2.2.9'
 gem 'metadata_json_deps', '>= 0.2.0', '< 2'
 gem 'modulesync', '>= 2.6.0'
-gem "octokit", "~> 4.0"
+gem "octokit", "~> 8.1"
 # vim: syntax=ruby
