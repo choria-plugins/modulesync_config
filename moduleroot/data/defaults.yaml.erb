@@ -1,4 +1,15 @@
-<% module_name = "mcollective_agent_#{@metadata[:module_name].sub(/-agent$/, '')}" -%>
+<%
+    module_name = case @metadata[:module_name]
+                  when 'action-policy'
+                    "mcollective_util_actionpolicy"
+                  when 'tasks-agent'
+                    "mcollective_agent_bolt_tasks"
+                  when /-agent$/
+                    "mcollective_agent_#{@metadata[:module_name].sub(/-agent$/, '')}"
+                  else
+                    raise "Don't know how to construct module name"
+                  end
+-%>
 lookup_options:
   <%= module_name %>::gem_dependencies:
     merge:
