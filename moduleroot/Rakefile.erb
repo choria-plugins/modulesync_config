@@ -50,13 +50,13 @@ task :prep_version do
         done = true
         puts "Adding a new entry to CHANGELOG.md:"
         puts "-------------------- 8< --------------------"
-        new_entry = <<~EOT
-          ## #{ENV["VERSION"]}
+        new_entry = <<~END_CHANGELOG
+          ## #{ENV['VERSION']}
 
-          Released #{Time.now.strftime("%Y-%m-%d")}
+          Released #{Time.now.strftime('%Y-%m-%d')}
 
-          #{`git log --oneline $(git tag | tail -n 1)..HEAD`.lines.map { |l| l.sub(/^/, " * ")}.join }
-        EOT
+          #{`git log --oneline $(git tag | tail -n 1)..HEAD`.lines.map { |l| l.sub(/^/, ' * ')}.join}
+        END_CHANGELOG
         puts new_entry
         puts "-------------------- 8< --------------------"
         f.puts new_entry
