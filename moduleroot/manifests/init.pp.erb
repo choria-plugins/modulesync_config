@@ -24,9 +24,10 @@ class <%= choria_module_name %> (
   Hash $server_config = {},
   Boolean $client = $mcollective::client,
   Boolean $server = $mcollective::server,
-  Enum["present", "absent"] $ensure = "present"
+  Enum['present', 'absent'] $ensure = 'present'
 ) {
   mcollective::module_plugin{$name:
+    ensure                      => $ensure,
     config_name                 => $config_name,
     client_files                => $client_files,
     server_files                => $server_files,
@@ -48,6 +49,5 @@ class <%= choria_module_name %> (
     server_config               => $server_config,
     client                      => $client,
     server                      => $server,
-    ensure                      => $ensure
   }
 }
