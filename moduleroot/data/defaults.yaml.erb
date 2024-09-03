@@ -1,30 +1,17 @@
-<%
-    module_name = case @metadata[:module_name]
-                  when "action-policy"
-                    "mcollective_util_actionpolicy"
-                  when "mcollective_choria"
-                    "mcollective_choria"
-                  when "tasks-agent"
-                    "mcollective_agent_bolt_tasks"
-                  when /-agent$/
-                    "mcollective_agent_#{@metadata[:module_name].sub(/-agent$/, '')}"
-                  else
-                    raise "Don't know how to construct module name"
-                  end
--%>
+<% require_relative '../../lib/util.rb' -%>
 lookup_options:
-  <%= module_name %>::gem_dependencies:
+  <%= choria_module_name %>::gem_dependencies:
     merge:
       strategy: deep
-  <%= module_name %>::package_dependencies:
+  <%= choria_module_name %>::package_dependencies:
     merge:
       strategy: deep
-  <%= module_name %>::config:
+  <%= choria_module_name %>::config:
     merge:
       strategy: deep
-  <%= module_name %>::client_config:
+  <%= choria_module_name %>::client_config:
     merge:
       strategy: deep
-  <%= module_name %>::server_config:
+  <%= choria_module_name %>::server_config:
     merge:
       strategy: deep
